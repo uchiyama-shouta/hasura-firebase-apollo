@@ -1,9 +1,10 @@
 import { VFC, memo } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_TASKS } from "src/queries/task/taskQueries";
-import { Task } from "src/types/responseType";
 import { TaskItemMemo } from "./TaskItem";
 import Cookie from "universal-cookie";
+
+import type { Task } from "src/types/responseType";
 
 const TaskList: VFC = () => {
 	const cookie = new Cookie();

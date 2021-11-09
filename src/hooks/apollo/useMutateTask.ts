@@ -9,7 +9,7 @@ import {
 export const useMutateTask = () => {
 	const [createTaskMutation, { error: createError }] = useMutation(
 		CREATE_TASK,
-		{ refetchQueries: [GET_TASKS] },
+		{ refetchQueries: [GET_TASKS],  },
 	);
 	const [updateTaskMutation, { error: updateError }] = useMutation(
 		UPDATE_TASK,

@@ -1,21 +1,12 @@
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { RecoilRoot } from "recoil";
+import { ApolloProvider } from "@apollo/client";
 import { useUserChanged } from "src/hooks/useUserChanged";
-import Cookie from "universal-cookie";
-
-const cookie = new Cookie();
-
-const client = new ApolloClient({
-	uri: process.env.NEXT_PUBLIC_HASURA_URL,
-	cache: new InMemoryCache(),
-	headers: {
-		Authorization: cookie.get("token") ? `Bearer ${cookie.get("token")}` : "",
-	},
-});
+import { initializeApollo } from "src/lib/apolloClient";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+	const client = initializeApollo();
 	useUserChanged();
 	return (
 		<ApolloProvider client={client}>

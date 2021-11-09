@@ -1,9 +1,9 @@
 import { VFC, memo } from "react";
 import { PencilAltIcon, TrashIcon } from "@heroicons/react/solid";
-// import { useAppMutate } from "../hooks/useAppMutate";
 import { Task } from "src/types/responseType";
 import { useSetRecoilState } from "recoil";
 import { editedTask } from "src/atoms/taskState";
+import { useHandleTasks } from "src/hooks/useHandleTasks";
 
 interface Props {
 	task: Task;
@@ -11,13 +11,7 @@ interface Props {
 
 const TaskItem: VFC<Props> = ({ task }) => {
 	const setEditedTask = useSetRecoilState(editedTask);
-	// const { deleteTaskMutation } = useAppMutate();
-	// if (deleteTaskMutation.isLoading) {
-	// 	return <p>Deleting...</p>;
-	// }
-	// if (deleteTaskMutation.error) {
-	// 	return <p>Error</p>;
-	// }
+	const { handleDelete } = useHandleTasks();
 
 	const handleClick = () => {
 		setEditedTask({
@@ -25,6 +19,7 @@ const TaskItem: VFC<Props> = ({ task }) => {
 			title: task.title,
 		});
 	};
+
 	return (
 		<li className="my-3">
 			<span className="font-bold">{task.title}</span>
@@ -35,9 +30,7 @@ const TaskItem: VFC<Props> = ({ task }) => {
 				/>
 				<TrashIcon
 					className="w-5 h-5 text-blue-500 cursor-pointer"
-					// onClick={() => {
-					// 	deleteTaskMutation.mutate(task.id);
-					// }}
+					onClick={handleDelete}
 				/>
 			</div>
 		</li>

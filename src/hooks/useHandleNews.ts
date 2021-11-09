@@ -21,6 +21,7 @@ export const useHandleNews = () => {
 		} else {
 			updateNewsMutation({ variables: news });
 		}
+		setNews({ id: "", content: "" });
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,9 +39,7 @@ export const useHandleNews = () => {
 		news,
 		disabled,
 		buttonText,
-		createError,
-		updateError,
-		deleteError,
+		error: createError || updateError|| deleteError,
 		handleSubmit,
 		handleChange,
 		handleDelete,

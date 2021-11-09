@@ -1,26 +1,12 @@
-import { VFC, memo, FormEvent, ChangeEvent } from "react";
-import { useRecoilState } from "recoil";
-import { editedTask } from "src/atoms/taskState";
-// import { useAppMutate } from "../hooks/useAppMutate";
+import { VFC, memo } from "react";
+import { useHandleTasks } from "src/hooks/useHandleTasks";
 
 const TaskEdit: VFC = () => {
-	// const { createTaskMutation, updateTaskMutation } = useAppMutate();
-	const [task, setTask] = useRecoilState(editedTask);
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		// if (editedTask.id === "") {
-		// 	createTaskMutation.mutate(editedTask.title);
-		// } else {
-		// 	updateTaskMutation.mutate(editedTask);
-		// }
-	};
+	const { task, handleChange, handleSubmit, error } = useHandleTasks();
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setTask({ ...task, title: e.target.value });
-	};
-	// if (createTaskMutation.error || updateTaskMutation.error) {
-	// 	return <div>{"Error"}</div>;
-	// }
+	if (error) {
+		return <div>Error</div>;
+	}
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>

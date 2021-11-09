@@ -12,9 +12,9 @@ type Props = {
 
 const NewsItem: VFC<Props> = ({ news }) => {
 	const setState = useSetRecoilState(newsState);
-	const { deleteError, handleDelete } = useHandleNews();
+	const { error, handleDelete } = useHandleNews();
 
-	if (deleteError) {
+	if (error) {
 		return <p>Error</p>;
 	}
 

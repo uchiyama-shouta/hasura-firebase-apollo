@@ -2,17 +2,10 @@ import { VFC, memo } from "react";
 import { useHandleNews } from "src/hooks/useHandleNews";
 
 const NewsEdit: VFC = () => {
-	const {
-		news,
-		disabled,
-		buttonText,
-		createError,
-		updateError,
-		handleChange,
-		handleSubmit,
-	} = useHandleNews();
+	const { news, disabled, buttonText, error, handleChange, handleSubmit } =
+		useHandleNews();
 
-	if (createError || updateError) {
+	if (error) {
 		return <div>Error</div>;
 	}
 
